@@ -1,8 +1,22 @@
 # ember-service-worker-update-notify
 
-This README outlines the details of collaborating on this Ember addon.
+Adds an `{{service-worker-update-notify}}` component which displays
+a reload link if the service-worker has found an update.
+
+Overwrite the default message using the component in block form:
+```handlebars
+{{#service-worker-update-notify}}
+  <a class="service-worker-update-notify" href="">
+    A new version is available, click here to update.
+  </a>
+{{/service-worker-update-notify}}
+```
 
 ## Installation
+
+* `ember install ember-service-worker-update-notify`
+
+### Local installation
 
 * `git clone <repository-url>` this repository
 * `cd ember-service-worker-update-notify`
