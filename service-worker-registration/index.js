@@ -2,8 +2,8 @@ import {
   addSuccessHandler
 } from 'ember-service-worker/service-worker-registration'
 
-addSuccessHandler(function emberServiceWorkerUpdateNotifyRegistration(reg) {
-  window.hasServiceWorkerUpdate = new Promise(function hasServiceWorkerUpdate(resolve) {
+window.hasServiceWorkerUpdate = new Promise(function hasServiceWorkerUpdate(resolve) {
+  addSuccessHandler(function emberServiceWorkerUpdateNotifyRegistration(reg) {
     reg.onupdatefound = function serviceWorkerHasFoundUpdate() {
       const { installing } = reg
 
