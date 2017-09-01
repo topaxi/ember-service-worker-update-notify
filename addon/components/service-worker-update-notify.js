@@ -12,7 +12,6 @@ export default Ember.Component.extend({
   didInsertElement() {
     serviceWorkerHasUpdate()
       .then(hasUpdate => {
-        console.log({ hasUpdate })
         this.set('hasUpdate', hasUpdate)
       })
   },
