@@ -1,18 +1,16 @@
 {
   "name": "ember-service-worker-update-notify",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Update notification for service workers",
-  "keywords": [
-    "ember-addon",
-    "ember-service-worker-plugin"
-  ],
+  "keywords": ["ember-addon", "ember-service-worker-plugin"],
   "license": "MIT",
   "author": "Damian Senn <damian.senn@topaxi.codes>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "https://github.com/topaxi/ember-service-worker-update-notify.git",
+  "repository":
+    "https://github.com/topaxi/ember-service-worker-update-notify.git",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
