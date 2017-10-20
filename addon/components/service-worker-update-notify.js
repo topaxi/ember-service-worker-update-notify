@@ -10,9 +10,8 @@ export default Ember.Component.extend({
   hasUpdate: false,
 
   didInsertElement() {
-    serviceWorkerHasUpdate()
-      .then(hasUpdate => {
-        this.set('hasUpdate', hasUpdate)
-      })
+    serviceWorkerHasUpdate().then(hasUpdate => {
+      this.set('hasUpdate', hasUpdate)
+    })
   },
 })
