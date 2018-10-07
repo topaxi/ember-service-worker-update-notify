@@ -20,8 +20,9 @@ export default Component.extend({
   setupTask: task(function*() {
     const hasServiceWorker = 'serviceWorker' in navigator;
     const supportsPromises = 'Promise' in window;
+    const hookInstalled = 'hasServiceWorkerUpdate' in window;
 
-    if (hasServiceWorker && supportsPromises) {
+    if (hookInstalled && hasServiceWorker && supportsPromises) {
       yield timeout(this.pollingInterval);
       this._attachUpdateHandler();
 
@@ -42,7 +43,7 @@ export default Component.extend({
   }),
 
   _attachUpdateHandler() {
-    serviceWorkerHasUpdate.then(hasUpdate => {
+    window.hasServiceWorkerUpdate().then(hasUpdate => {
       if (!isEmpty(this.polling)) {
         this.polling.cancel();
       }
