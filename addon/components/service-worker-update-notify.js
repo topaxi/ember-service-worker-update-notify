@@ -42,7 +42,7 @@ export default Component.extend({
   }),
 
   _attachUpdateHandler() {
-    serviceWorkerHasUpdate.then(hasUpdate => {
+    serviceWorkerHasUpdate().then(hasUpdate => {
       if (!isEmpty(this.polling)) {
         this.polling.cancel();
       }
