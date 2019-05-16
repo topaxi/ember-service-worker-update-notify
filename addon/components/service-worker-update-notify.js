@@ -33,7 +33,7 @@ export default Component.extend({
 
   pollingTask: task(function*() {
     while (true) {
-      const reg = yield navigator.serviceWorker.register('/sw.js', { scope: '/' });
+      const reg = yield navigator.serviceWorker.register('{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}', { scope: '{{ROOT_URL}}' });
 
       reg.update();
 
