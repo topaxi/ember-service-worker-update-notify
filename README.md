@@ -13,7 +13,7 @@ Overwrite the default message using the component in block form:
 {{/service-worker-update-notify}}
 ```
 
-The poll interval can be configured in your `.ember-cli-buil.js` with:
+The poll interval can be configured in your `ember-cli-buil.js` with:
 ```js
 'ember-service-worker-update-notify': {
   pollingInterval:1200000 // Default is 20min
