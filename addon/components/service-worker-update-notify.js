@@ -1,24 +1,17 @@
 import Component from '@ember/component';
 import { isEmpty } from '@ember/utils';
-import { getOwner } from '@ember/application';
 import { task, timeout } from 'ember-concurrency';
 
 import layout from '../templates/components/service-worker-update-notify'
 import serviceWorkerHasUpdate from '../utils/service-worker-has-update'
 
-
 export default Component.extend({
   layout,
+  pollingInterval: 1200000, // 20 minutes in ms
 
   tagName: '',
 
   hasUpdate: false,
-
-  init() {
-    this._super(...arguments)
-    this.set('pollingInterval', getOwner(this).resolveRegistration("config:environment")['ember-service-worker-update-notify'].pollingInterval)
-
-  },
 
   /**
    * Delay attaching the updateHandler to prevent users from
