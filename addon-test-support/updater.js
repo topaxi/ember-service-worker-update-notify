@@ -13,7 +13,7 @@ export function setupServiceWorkerUpdater(hooks) {
   });
 }
 
-export async function hasServiceWorkerUpdate() {
+export async function serviceWorkerUpdate() {
   window.__hasServiceWorkerUpdate__deferred &&
   window.__hasServiceWorkerUpdate__deferred.resolve &&
   window.__hasServiceWorkerUpdate__deferred.resolve(true)

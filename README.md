@@ -51,7 +51,7 @@ module('Application | Index', function(hooks) {
   test('the update is shown', async function(assert) {
     // assert that the content is not shown
 
-    await hasServiceWorkerUpdate();
+    await serviceWorkerUpdate();
 
     // assert that the content is shown
 

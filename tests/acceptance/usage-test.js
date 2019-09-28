@@ -4,7 +4,7 @@ import { setupApplicationTest } from 'ember-qunit';
 
 import {
   setupServiceWorkerUpdater,
-  hasServiceWorkerUpdate,
+  serviceWorkerUpdate,
 } from 'ember-service-worker-update-notify/test-support/updater';
 
 const selector = '[data-test-update]';
@@ -24,7 +24,7 @@ module('Acceptance | usage', function(hooks) {
     module('an update is ready', function() {
 
       test('the notifier still cannot become visible', async function(assert) {
-        await hasServiceWorkerUpdate();
+        await serviceWorkerUpdate();
 
         assert.dom(selector).doesNotExist();
       });
@@ -45,7 +45,7 @@ module('Acceptance | usage', function(hooks) {
     module('an update is ready', function() {
 
       test('the notifier can become visible', async function(assert) {
-        await hasServiceWorkerUpdate();
+        await serviceWorkerUpdate();
 
         assert.dom(selector).exists();
       });
