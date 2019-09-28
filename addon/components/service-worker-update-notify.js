@@ -4,16 +4,28 @@ import { isEmpty } from '@ember/utils';
 import { task, timeout } from 'ember-concurrency';
 import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
 
-import layout from '../templates/components/service-worker-update-notify'
-import serviceWorkerHasUpdate from '../utils/service-worker-has-update'
+import layout from '../templates/components/service-worker-update-notify';
+import serviceWorkerHasUpdate from '../utils/service-worker-has-update';
+
+
+async function update() {
+  const reg = await navigator.serviceWorker.register(
+    '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
+    { scope: '{{ROOT_URL}}' }
+  );
+
+  reg.update();
+}
 
 export default Component.extend({
   layout,
-  pollingInterval: 1200000, // 20 minutes in ms
-
   tagName: '',
 
+  // private
   hasUpdate: false,
+
+  // public
+  pollingInterval: 1200000, // 20 minutes in ms
 
   didInsertElement() {
     this._super(...arguments);
@@ -21,19 +33,14 @@ export default Component.extend({
     if (Ember.testing) {
       this._attachUpdateHandler();
     } else {
+      // we can't interact with service workers in
+      // the way we want during testing?
+      // seems like it would be complicated if we were
+      // to try.
+      // Also, the tasks use a while(true) loop,
+      // which would prevent tests from every finishing
       this.setupTask.perform();
     }
-  },
-
-  // could be overridden for testing.
-  // called every this.pollingInterval
-  async update() {
-    const reg = await navigator.serviceWorker.register(
-      '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
-      { scope: '{{ROOT_URL}}' }
-    );
-
-    reg.update();
   },
 
   /*********************************************************
@@ -58,13 +65,13 @@ export default Component.extend({
     }
   })),
 
-  pollingTask: withTestWaiter(task(function*() {
+  pollingTask: task(function*() {
     while (true) {
-      yield this.update();
+      yield update();
 
       yield timeout(this.pollingInterval);
     }
-  })),
+  }),
 
   _attachUpdateHandler() {
     serviceWorkerHasUpdate().then(hasUpdate => {
