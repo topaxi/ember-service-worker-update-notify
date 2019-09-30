@@ -6,11 +6,17 @@ a reload link if the service-worker has found an update.
 Overwrite the default message using the component in block form:
 
 ```handlebars
-{{#service-worker-update-notify}}
+<ServiceWorkerUpdateNotify>
   <a class="service-worker-update-notify" href="">
     A new version is available, click here to update.
   </a>
-{{/service-worker-update-notify}}
+</ServiceWorkerUpdateNotify>
+```
+
+The poll interval can be configured with:
+```handlebars
+<ServiceWorkerUpdateNotify @pollingInterval={{yourTimeout}}/>
+
 ```
 
 ## Installation
