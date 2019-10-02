@@ -70,8 +70,7 @@ module('Application | Index', function(hooks) {
 ## Installation
 
 ```bash
-yarn add --dev ember-concurrency
-yarn add --dev ember-concurrency-test-waiter
+yarn add --dev ember-concurrency # peer-dependency
 yarn add --dev ember-service-worker-update-notify
 ```
 
