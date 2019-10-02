@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { getOwner } from '@ember/application';
 import Component from '@ember/component';
 import { isEmpty } from '@ember/utils';
 import { task, timeout } from 'ember-concurrency';
@@ -7,6 +8,7 @@ import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
 import layout from '../templates/components/service-worker-update-notify';
 import serviceWorkerHasUpdate from '../utils/service-worker-has-update';
 
+const configKey = 'ember-service-worker-update-notify';
 
 async function update() {
   const reg = await navigator.serviceWorker.register(
@@ -26,6 +28,19 @@ export default Component.extend({
 
   // public
   pollingInterval: 1200000, // 20 minutes in ms
+
+  get config() {
+    return getOwner(this).resolveRegistration('config:environment')[configKey];
+  },
+
+  init() {
+    this._super(...arguments);
+
+    let config = this.config;
+    if (config && config.pollingInterval) {
+      this.set('pollingInterval', config.pollingInterval);
+    }
+  },
 
   didInsertElement() {
     this._super(...arguments);
