@@ -3,7 +3,6 @@ import { getOwner } from '@ember/application';
 import Component from '@ember/component';
 import { isEmpty } from '@ember/utils';
 import { task, timeout } from 'ember-concurrency';
-import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
 
 import layout from '../templates/components/service-worker-update-notify';
 import serviceWorkerHasUpdate from '../utils/service-worker-has-update';
@@ -11,6 +10,10 @@ import serviceWorkerHasUpdate from '../utils/service-worker-has-update';
 const configKey = 'ember-service-worker-update-notify';
 
 async function update() {
+  if (Ember.testing) {
+    return;
+  }
+
   const reg = await navigator.serviceWorker.register(
     '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
     { scope: '{{ROOT_URL}}' }
@@ -57,42 +60,23 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    if (Ember.testing) {
-      this._attachUpdateHandler();
-    } else {
-      // we can't interact with service workers in
-      // the way we want during testing?
-      // seems like it would be complicated if we were
-      // to try.
-      // Also, the tasks use a while(true) loop,
-      // which would prevent tests from every finishing
-      this.setupTask.perform();
-    }
+    this.setup();
   },
 
   /*********************************************************
    * Private APIs
    ********************************************************/
 
-  /**
-   * Delay attaching the updateHandler to prevent users from
-   * seeing a new build notification immediately on page load.
-   */
-  setupTask: withTestWaiter(task(function*() {
-    const hasServiceWorker = 'serviceWorker' in navigator;
-    const supportsPromises = 'Promise' in window;
-
-    if (hasServiceWorker && supportsPromises) {
-      yield timeout(this.pollingInterval);
-      this._attachUpdateHandler();
-
-      const polling = this.pollingTask.perform();
-
-      this.set('polling', polling);
-    }
-  })),
+  setup() {
+    this.pollingTask.perform();
+  },
 
   pollingTask: task(function*() {
+    yield timeout(this.pollingInterval);
+    // Delay attaching the updateHandler to prevent users from
+    // seeing a new build notification immediately on page load.
+    this._attachUpdateHandler();
+
     while (true) {
       yield update();
 
@@ -102,9 +86,7 @@ export default Component.extend({
 
   _attachUpdateHandler() {
     serviceWorkerHasUpdate().then(hasUpdate => {
-      if (!isEmpty(this.polling)) {
-        this.polling.cancel();
-      }
+      this.pollingTask.cancelAll();
 
       this.set('hasUpdate', hasUpdate);
     });
