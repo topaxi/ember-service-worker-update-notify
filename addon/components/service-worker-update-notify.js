@@ -40,6 +40,8 @@ export default Component.extend({
     //       as it's poorly documented.
     //       Consider moving to a glimmer component
     //       where this.args are available.
+    //
+    // eslint-disable-next-line ember/no-attrs-in-components
     let wasPassedIn = Boolean(this.attrs.pollingInterval);
 
     if (wasPassedIn) {
