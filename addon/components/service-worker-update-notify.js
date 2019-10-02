@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import { getOwner } from '@ember/application';
 import Component from '@ember/component';
-import { isEmpty } from '@ember/utils';
 import { task, timeout } from 'ember-concurrency';
 
 import layout from '../templates/components/service-worker-update-notify';
