@@ -36,6 +36,16 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
+    // NOTE: this.attrs *shouldn't* be used
+    //       as it's poorly documented.
+    //       Consider moving to a glimmer component
+    //       where this.args are available.
+    let wasPassedIn = Boolean(this.attrs.pollingInterval);
+
+    if (wasPassedIn) {
+      return;
+    }
+
     let config = this.config;
     if (config && config.pollingInterval) {
       this.set('pollingInterval', config.pollingInterval);
