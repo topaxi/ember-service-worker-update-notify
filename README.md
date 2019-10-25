@@ -25,11 +25,17 @@ The time is measured in milliseconds. The default is 1200000 (20 minutes).
 </ServiceWorkerUpdateNotify>
 ```
 
-The poll interval can also be configured in your `.ember-cli-buil.js` with:
+The poll interval can also be configured in your `config/environment.js` with:
 ```js
-'ember-service-worker-update-notify': {
-  pollingInterval:1200000 // Default is 20min
-}
+module.exports = function(environment) {
+  let ENV = {
+    'ember-service-worker-update-notify': {
+      pollingInterval:1200000 // Default is 20min
+    }
+  };
+
+ return ENV;
+};
 ```
 
 ## Testing in Your App
