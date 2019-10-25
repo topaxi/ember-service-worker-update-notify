@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { getOwner } from '@ember/application';
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { task, timeout } from 'ember-concurrency';
 
 import layout from '../templates/components/service-worker-update-notify';
@@ -31,9 +32,9 @@ export default Component.extend({
   // public
   pollingInterval: 1200000, // 20 minutes in ms
 
-  get config() {
+  config: computed(function() {
     return getOwner(this).resolveRegistration('config:environment')[configKey];
-  },
+  }),
 
   init() {
     this._super(...arguments);
