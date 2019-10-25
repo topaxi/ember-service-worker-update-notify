@@ -44,7 +44,7 @@ export default Component.extend({
     //       where this.args are available.
     //
     // eslint-disable-next-line ember/no-attrs-in-components
-    let wasPassedIn = this.attrs.hasOwnProperty('pollingInterval');
+    let wasPassedIn = Object.prototype.hasOwnProperty.call(this.attrs, 'pollingInterval');
 
     if (wasPassedIn) {
       return;
