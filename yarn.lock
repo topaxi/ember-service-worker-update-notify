@@ -3394,13 +3394,6 @@ ember-compatibility-helpers@^1.2.0:
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
 
-ember-concurrency-test-waiter@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/ember-concurrency-test-waiter/-/ember-concurrency-test-waiter-0.3.1.tgz#9bdf83c532d17d913bbc29ee934266cd504f015a"
-  integrity sha512-luSu1/nSgkrDVAbIwHlyrJ4Bv3k++1jon3EV2v4+4vNGUPwWK7eRMbymI07YIxEbMf7MZ1e8fvj0jy6Pq/9Yzw==
-  dependencies:
-    ember-cli-babel "^6.6.0"
-
 ember-concurrency@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-1.1.0.tgz#955f6961937c655ecc6ee4c3213e1191dc227ba3"

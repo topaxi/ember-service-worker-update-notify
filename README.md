@@ -25,6 +25,19 @@ The time is measured in milliseconds. The default is 1200000 (20 minutes).
 </ServiceWorkerUpdateNotify>
 ```
 
+The poll interval can also be configured in your `config/environment.js` with:
+```js
+module.exports = function(environment) {
+  let ENV = {
+    'ember-service-worker-update-notify': {
+      pollingInterval:1200000 // Default is 20min
+    }
+  };
+
+ return ENV;
+};
+```
+
 ## Testing in Your App
 
 Testing this in your app should mainly be concerned with presence
@@ -63,8 +76,7 @@ module('Application | Index', function(hooks) {
 ## Installation
 
 ```bash
-yarn add --dev ember-concurrency
-yarn add --dev ember-concurrency-test-waiter
+yarn add --dev ember-concurrency # peer-dependency
 yarn add --dev ember-service-worker-update-notify
 ```
 
