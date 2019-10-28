@@ -5,18 +5,18 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   layout,
   tagName: '',
-  serviceWorkerUpdate: service(),
+  serviceWorkerUpdateNotify: service(),
 
   hasUpdate: false,
 
   init() {
     this._super(...arguments);
     this._updateHandler = () => this.set('hasUpdate', true);
-    this.serviceWorkerUpdate.on('update', this._updateHandler);
+    this.serviceWorkerUpdateNotify.on('update', this._updateHandler);
   },
 
   willDestroy() {
     this._super(...arguments);
-    this.serviceWorkerUpdate.off('update', this._updateHandler);
+    this.serviceWorkerUpdateNotify.off('update', this._updateHandler);
   }
 });

@@ -10,15 +10,15 @@ const configKey = 'ember-service-worker-update-notify'
 
 async function update() {
   if (Ember.testing) {
-    return
+    return;
   }
 
   const reg = await navigator.serviceWorker.register(
     '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
     { scope: '{{ROOT_URL}}' },
-  )
+  );
 
-  reg.update()
+  reg.update();
 }
 
 export default Service.extend(Evented, {

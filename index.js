@@ -10,7 +10,7 @@ module.exports = {
     let serviceWorkerFilename = this._getServiceWorkerFilename()
 
     let replacedTree = replace(tree, {
-      files: ['components/service-worker-update-notify.js'],
+      files: ['services/service-worker-update-notify.js'],
       patterns: [
         {
           match: /{{ROOT_URL}}/g,
