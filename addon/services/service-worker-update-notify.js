@@ -51,7 +51,9 @@ export default Service.extend(Evented, {
 
   init() {
     this._super(...arguments);
-    this._attachUpdateHandler();
-    this.pollingTask.perform();
+    if (typeof FastBoot === 'undefined') {
+      this._attachUpdateHandler();
+      this.pollingTask.perform();
+    }
   }
 });
