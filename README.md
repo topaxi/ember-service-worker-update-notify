@@ -18,31 +18,6 @@ has been detected. Overwrite the default message using the component in block fo
 </ServiceWorkerUpdateNotify>
 ```
 
-Additionally, the frequency of how often a check will be made for an update
-can be configured via the `pollingInterval` argument.
-The time is measured in milliseconds. The default is 1200000 (20 minutes).
-
-```handlebars
-<ServiceWorkerUpdateNotify @pollingInterval={{2000}}>
-  <a class="service-worker-update-notify" href={{this.router.currentURL}}>
-    A new version is available, click here to update.
-  </a>
-</ServiceWorkerUpdateNotify>
-```
-
-The poll interval can also be configured in your `config/environment.js` with:
-```js
-module.exports = function(environment) {
-  let ENV = {
-    'ember-service-worker-update-notify': {
-      pollingInterval:1200000 // Default is 20min
-    }
-  };
-
- return ENV;
-};
-```
-
 ### Using the service
 
 The service allows you to react to an app update in a more programmatic manner, e.g. 
@@ -64,6 +39,22 @@ export default class ApplicationRoute extends Route {
     });
   }
 }
+```
+
+## Configuration
+
+The poll interval can be configured in your `config/environment.js` with:
+
+```js
+module.exports = function(environment) {
+  let ENV = {
+    'ember-service-worker-update-notify': {
+      pollingInterval: 1200000 // Default is 20min
+    }
+  };
+
+ return ENV;
+};
 ```
 
 ## Testing in Your App

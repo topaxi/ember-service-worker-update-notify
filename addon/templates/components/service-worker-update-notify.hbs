@@ -1,7 +1,3 @@
 {{#if this.hasUpdate}}
-  {{#if hasBlock}}
-    {{yield}}
-  {{else}}
-    <a class="service-worker-update-notify" href="">A new version is available, click here to update.</a>
-  {{/if}}
+  {{yield}}
 {{/if}}
