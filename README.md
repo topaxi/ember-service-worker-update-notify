@@ -1,6 +1,6 @@
 # ember-service-worker-update-notify
 
-Adds a `ember-service-worker-update-notify` service and `<ServiceWorkerUpdateNotify />` 
+Adds a `service-worker-update-notify` service and `<ServiceWorkerUpdateNotify />` 
 component which displays a reload link if the service-worker has found an update.
 
 ## Usage
