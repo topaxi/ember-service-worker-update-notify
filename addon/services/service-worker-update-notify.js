@@ -9,16 +9,12 @@ import serviceWorkerHasUpdate from '../utils/service-worker-has-update'
 const configKey = 'ember-service-worker-update-notify'
 
 async function update() {
-  if (Ember.testing) {
-    return;
-  }
-
   const reg = await navigator.serviceWorker.register(
     '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
     { scope: '{{ROOT_URL}}' },
   );
 
-  reg.update();
+  return reg.update();
 }
 
 export default Service.extend(Evented, {
@@ -53,7 +49,9 @@ export default Service.extend(Evented, {
     this._super(...arguments);
     if (typeof FastBoot === 'undefined') {
       this._attachUpdateHandler();
-      this.pollingTask.perform();
+      if (!Ember.testing) {
+        this.pollingTask.perform();
+      }
     }
   }
 });

@@ -34,10 +34,8 @@ module('Acceptance | usage', function(hooks) {
   module('with setup', function(hooks) {
     setupServiceWorkerUpdater(hooks);
 
-    hooks.beforeEach(function() {
-      // don't await, because the concurrency tasks
-      // will block settledState from occurring.
-      visit('/');
+    hooks.beforeEach(async function() {
+      await visit('/');
     });
 
     hooks.afterEach(async function() {
