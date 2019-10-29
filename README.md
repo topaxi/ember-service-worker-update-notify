@@ -1,9 +1,14 @@
 # ember-service-worker-update-notify
 
-Adds a `<ServiceWorkerUpdateNotify />` component which displays
-a reload link if the service-worker has found an update.
+Adds a `ember-service-worker-update-notify` service and `<ServiceWorkerUpdateNotify />` 
+component which displays a reload link if the service-worker has found an update.
 
-Overwrite the default message using the component in block form:
+## Usage
+
+### Using the component 
+
+The component will show a message to the user when the availability of an update
+has been detected. Overwrite the default message using the component in block form:
 
 ```handlebars
 <ServiceWorkerUpdateNotify>
@@ -36,6 +41,29 @@ module.exports = function(environment) {
 
  return ENV;
 };
+```
+
+### Using the service
+
+The service allows you to react to an app update in a more programmatic manner, e.g. 
+you could force reload the app. The service emits an `update` event once an update
+has been detected. Here is an example of an application route that reloads the app
+automatically:
+
+```js
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default class ApplicationRoute extends Route {
+  @service
+  serviceWorkerUpdateNotify;
+  
+  beforeModel() {
+    this.serviceWorkerUpdateNotify.on('update', () => {
+      window.location.reload();
+    });
+  }
+}
 ```
 
 ## Testing in Your App
