@@ -6,7 +6,8 @@ import { computed } from '@ember/object';
 import { task, timeout } from 'ember-concurrency'
 import serviceWorkerHasUpdate from '../utils/service-worker-has-update'
 
-const configKey = 'ember-service-worker-update-notify'
+const configKey = 'ember-service-worker-update-notify';
+const supportsServiceWorker = typeof navigator !== 'undefined' && 'serviceWorker' in navigator;
 
 async function update() {
   const reg = await navigator.serviceWorker.register(
@@ -49,7 +50,7 @@ export default Service.extend(Evented, {
     this._super(...arguments);
     if (typeof FastBoot === 'undefined') {
       this._attachUpdateHandler();
-      if (!Ember.testing) {
+      if (!Ember.testing && supportsServiceWorker) {
         this.pollingTask.perform();
       }
     }
