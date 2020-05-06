@@ -8,6 +8,7 @@ module.exports = {
   treeForAddon(tree) {
     let rootUrl = this._getRootURL()
     let serviceWorkerFilename = this._getServiceWorkerFilename()
+    let isEnabled = this._getServiceWorkerEnabled()
 
     let replacedTree = replace(tree, {
       files: ['services/service-worker-update-notify.js'],
@@ -20,10 +21,28 @@ module.exports = {
           match: /{{SERVICE_WORKER_FILENAME}}/g,
           replacement: serviceWorkerFilename,
         },
+        {
+          match: /{{SERVICE_WORKER_ENABLED}}/g,
+          replacement: isEnabled ? 'true' : 'false',
+        },
       ],
     })
 
     return this._super(replacedTree)
+  },
+
+  _getServiceWorkerEnabled() {
+    if (this._swEnabled) {
+      return this._swEnabled
+    }
+
+    let options = this._getOptions()
+    let enabled = options.enabled;
+    if (enabled === undefined) {
+      // Default is TRUE
+      enabled = true;
+    }
+    return (this._swEnabled = enabled)
   },
 
   _getRootURL() {
