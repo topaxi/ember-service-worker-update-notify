@@ -10,12 +10,18 @@ const configKey = 'ember-service-worker-update-notify';
 const supportsServiceWorker = typeof navigator !== 'undefined' && 'serviceWorker' in navigator;
 
 async function update() {
-  const reg = await navigator.serviceWorker.register(
-    '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
-    { scope: '{{ROOT_URL}}' },
-  );
+  try {
+    // FF will throw an `SecurityError: The operation is insecure.` error here when cookies are disabled/restricted.
+    // So guard in a try/catch
+    const reg = await navigator.serviceWorker.register(
+      '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
+      { scope: '{{ROOT_URL}}' },
+    )
 
-  return reg.update();
+    return reg.update()
+  } catch(e) {
+    console.error(e);
+  }
 }
 
 export default Service.extend(Evented, {
