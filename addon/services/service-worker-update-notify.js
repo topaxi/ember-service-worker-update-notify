@@ -10,12 +10,14 @@ const configKey = 'ember-service-worker-update-notify';
 const supportsServiceWorker = typeof navigator !== 'undefined' && 'serviceWorker' in navigator;
 
 async function update() {
-  const reg = await navigator.serviceWorker.register(
-    '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
-    { scope: '{{ROOT_URL}}' },
-  );
+  if ('serviceWorker' in navigator) {
+    const reg = await navigator.serviceWorker.register(
+      '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
+      { scope: '{{ROOT_URL}}' },
+    );
 
-  return reg.update();
+    return reg.update();
+  }
 }
 
 export default Service.extend(Evented, {
