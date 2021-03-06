@@ -31,8 +31,8 @@ module.exports = {
       return this._projectRootURL
     }
 
-    let options = this._getOptions()
     let config = this._getConfig()
+    let options = this._getOptions()
     let rootURL = options.rootUrl || config.rootURL || config.baseURL || '/'
 
     return (this._projectRootURL = rootURL)
@@ -49,10 +49,14 @@ module.exports = {
   },
 
   _getOptions() {
-    return this.app.options['ember-service-worker'] || {}
+    return this._getApp().options['ember-service-worker'] || {}
   },
 
   _getConfig() {
-    return this.project.config(this.app.env)
+    return this.project.config(this._getApp().env)
+  },
+
+  _getApp() {
+    return this.app || { options: {} };
   },
 }
