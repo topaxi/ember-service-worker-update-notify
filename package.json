@@ -68,7 +68,7 @@
     "qunit-dom": "^1.6.0"
   },
   "peerDependencies": {
-    "ember-concurrency": "^1.0.0"
+    "ember-concurrency": "^2.0.3"
   },
   "engines": {
     "node": "10.* || >= 12"
