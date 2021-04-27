@@ -1,6 +1,6 @@
 'use strict'
 
-const replace = require('broccoli-replace')
+var BroccoliReplace = require('broccoli-replace')
 
 module.exports = {
   name: require('./package').name,
@@ -10,7 +10,7 @@ module.exports = {
     let serviceWorkerFilename = this._getServiceWorkerFilename()
     let isEnabled = this._getServiceWorkerEnabled()
 
-    let replacedTree = replace(tree, {
+    let replacedTree = new BroccoliReplace(tree, {
       files: ['services/service-worker-update-notify.js'],
       patterns: [
         {
