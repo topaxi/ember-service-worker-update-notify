@@ -122,7 +122,6 @@ yarn add --dev ember-service-worker-update-notify
 - `ember serve`
 - Visit the dummy application at [http://localhost:4200](http://localhost:4200).
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
 ## License
 

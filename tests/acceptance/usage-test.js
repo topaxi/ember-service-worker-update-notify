@@ -1,59 +1,56 @@
-import { module, test } from 'qunit';
-import { visit } from '@ember/test-helpers';
-import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit'
+import { visit } from '@ember/test-helpers'
+import { setupApplicationTest } from 'ember-qunit'
 
 import {
   setupServiceWorkerUpdater,
   serviceWorkerUpdate,
-} from 'ember-service-worker-update-notify/test-support/updater';
+} from 'ember-service-worker-update-notify/test-support/updater'
 
-const selector = '[data-test-update]';
+const selector = '[data-test-update]'
 
-module('Acceptance | usage', function(hooks) {
-  setupApplicationTest(hooks);
+module('Acceptance | usage', function (hooks) {
+  setupApplicationTest(hooks)
 
-  module('without setup', function(hooks) {
-    hooks.beforeEach(async function() {
-      await visit('/');
-    });
+  module('without setup', function (hooks) {
+    hooks.beforeEach(async function () {
+      await visit('/')
+    })
 
-    test('the notifier is not visible', function(assert) {
-      assert.dom(selector).doesNotExist();
-    });
+    test('the notifier is not visible', function (assert) {
+      assert.dom(selector).doesNotExist()
+    })
 
-    module('an update is ready', function() {
+    module('an update is ready', function () {
+      test('the notifier still cannot become visible', async function (assert) {
+        await serviceWorkerUpdate()
 
-      test('the notifier still cannot become visible', async function(assert) {
-        await serviceWorkerUpdate();
+        assert.dom(selector).doesNotExist()
+      })
+    })
+  })
 
-        assert.dom(selector).doesNotExist();
-      });
-    });
-  });
+  module('with setup', function (hooks) {
+    setupServiceWorkerUpdater(hooks)
 
-  module('with setup', function(hooks) {
-    setupServiceWorkerUpdater(hooks);
+    hooks.beforeEach(async function () {
+      await visit('/')
+    })
 
-    hooks.beforeEach(async function() {
-      await visit('/');
-    });
+    hooks.afterEach(async function () {
+      await serviceWorkerUpdate()
+    })
 
-    hooks.afterEach(async function() {
-      await serviceWorkerUpdate();
-    });
+    test('the notifier is not visible', function (assert) {
+      assert.dom(selector).doesNotExist()
+    })
 
-    test('the notifier is not visible', function(assert) {
-      assert.dom(selector).doesNotExist();
-    });
+    module('an update is ready', function () {
+      test('the notifier can become visible', async function (assert) {
+        await serviceWorkerUpdate()
 
-    module('an update is ready', function() {
-
-      test('the notifier can become visible', async function(assert) {
-        await serviceWorkerUpdate();
-
-        assert.dom(selector).exists();
-      });
-    });
-  });
-
-});
+        assert.dom(selector).exists()
+      })
+    })
+  })
+})

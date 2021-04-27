@@ -1,58 +1,70 @@
 import Ember from 'ember'
 import Service from '@ember/service'
-import Evented from '@ember/object/evented';
-import { getOwner } from '@ember/application';
-import { computed } from '@ember/object';
+import Evented from '@ember/object/evented'
+import { getOwner } from '@ember/application'
+import { tracked } from '@glimmer/tracking'
 import { task, timeout } from 'ember-concurrency'
 import serviceWorkerHasUpdate from '../utils/service-worker-has-update'
 
-const configKey = 'ember-service-worker-update-notify';
-const supportsServiceWorker = typeof navigator !== 'undefined' && 'serviceWorker' in navigator;
+const configKey = 'ember-service-worker-update-notify'
+const supportsServiceWorker =
+  typeof navigator !== 'undefined' && 'serviceWorker' in navigator
 
 async function update() {
+  if (!IS_ENABLED) return
   const reg = await navigator.serviceWorker.register(
     '{{ROOT_URL}}{{SERVICE_WORKER_FILENAME}}',
     { scope: '{{ROOT_URL}}' },
-  );
+  )
 
-  return reg.update();
+  return reg.update()
 }
 
-export default Service.extend(Evented, {
+const IS_ENABLED = '{{SERVICE_WORKER_ENABLED}}' === 'true'
 
-  hasUpdate: false,
+export default class ServiceWorkerUpdateNotify extends Service.extend(
+  Evented,
+) {
+  @tracked hasUpdate = false
+  pollingInterval = false;
 
-  pollingInterval: computed(function() {
-    let config = getOwner(this).resolveRegistration('config:environment')[configKey];
-    return config && config.pollingInterval || 120000;
-  }),
-
-  pollingTask: task(function* () {
+  @task
+  *pollingTask() {
     while (true) {
-      yield update();
+      yield update()
 
-      yield timeout(this.pollingInterval);
+      yield timeout(this.pollingInterval)
     }
-  }),
+  }
 
   _attachUpdateHandler() {
-    serviceWorkerHasUpdate().then(hasUpdate => {
-      this.pollingTask.cancelAll();
+    serviceWorkerHasUpdate().then((hasUpdate) => {
+      this.pollingTask.cancelAll()
 
       if (hasUpdate) {
-        this.set('hasUpdate', true);
-        this.trigger('update');
+        this.hasUpdate = true
+        this.trigger('update')
       }
     })
-  },
+  }
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments)
+    if (!IS_ENABLED) return
+    this.pollingInterval = this.getPollingInterval()
+
     if (typeof FastBoot === 'undefined') {
-      this._attachUpdateHandler();
+      this._attachUpdateHandler()
       if (!Ember.testing && supportsServiceWorker) {
-        this.pollingTask.perform();
+        this.pollingTask.perform()
       }
     }
   }
-});
+
+  getPollingInterval() {
+    let config = getOwner(this).resolveRegistration('config:environment')[
+      configKey
+    ]
+    return (config && config.pollingInterval) || 120000
+  }
+}

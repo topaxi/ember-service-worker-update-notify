@@ -1,0 +1,27 @@
+{
+  "folders": [
+    {
+      "path": "./",
+    },
+	],
+  "settings": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/tmp": true,
+      "**/dist": true,
+      "**/package-lock.json": true
+    },
+    "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+    "[handlebars]": {
+      "editor.formatOnSave": false
+    },
+    "[javascript]": {
+      "editor.formatOnSave": false
+    },
+    "[scss]": {
+      "editor.formatOnSave": true
+    },
+  },
+}

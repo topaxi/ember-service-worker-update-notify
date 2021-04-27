@@ -1,6 +1,6 @@
 'use strict'
 
-const replace = require('broccoli-replace')
+var BroccoliReplace = require('broccoli-replace')
 
 module.exports = {
   name: require('./package').name,
@@ -8,8 +8,9 @@ module.exports = {
   treeForAddon(tree) {
     let rootUrl = this._getRootURL()
     let serviceWorkerFilename = this._getServiceWorkerFilename()
+    let isEnabled = this._getServiceWorkerEnabled()
 
-    let replacedTree = replace(tree, {
+    let replacedTree = new BroccoliReplace(tree, {
       files: ['services/service-worker-update-notify.js'],
       patterns: [
         {
@@ -20,10 +21,28 @@ module.exports = {
           match: /{{SERVICE_WORKER_FILENAME}}/g,
           replacement: serviceWorkerFilename,
         },
+        {
+          match: /{{SERVICE_WORKER_ENABLED}}/g,
+          replacement: isEnabled ? 'true' : 'false',
+        },
       ],
     })
 
     return this._super(replacedTree)
+  },
+
+  _getServiceWorkerEnabled() {
+    if (this._swEnabled) {
+      return this._swEnabled
+    }
+
+    let options = this._getOptions()
+    let enabled = options.enabled
+    if (enabled === undefined) {
+      // Default is TRUE
+      enabled = true
+    }
+    return (this._swEnabled = enabled)
   },
 
   _getRootURL() {
