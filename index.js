@@ -37,10 +37,10 @@ module.exports = {
     }
 
     let options = this._getOptions()
-    let enabled = options.enabled;
+    let enabled = options.enabled
     if (enabled === undefined) {
       // Default is TRUE
-      enabled = true;
+      enabled = true
     }
     return (this._swEnabled = enabled)
   },
