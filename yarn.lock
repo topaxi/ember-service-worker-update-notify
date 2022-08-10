@@ -969,7 +969,7 @@
   "resolved" "https://registry.npmjs.org/@ember-data/rfc395-data/-/rfc395-data-0.0.4.tgz"
   "version" "0.0.4"
 
-"@ember/edition-utils@^1.1.1", "@ember/edition-utils@^1.2.0":
+"@ember/edition-utils@^1.2.0":
   "integrity" "sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog=="
   "resolved" "https://registry.npmjs.org/@ember/edition-utils/-/edition-utils-1.2.0.tgz"
   "version" "1.2.0"
@@ -1618,6 +1618,11 @@
     "babel-runtime" "^6.22.0"
     "babel-template" "^6.24.1"
 
+"babel-import-util@^1.2.0":
+  "integrity" "sha512-8HgkHWt5WawRFukO30TuaL9EiDUOdvyKtDwLma4uBNeUSDbOO0/hiPfavrOWxSS6J6TKXfukWHZ3wiqZhJ8ONQ=="
+  "resolved" "https://registry.npmjs.org/babel-import-util/-/babel-import-util-1.2.2.tgz"
+  "version" "1.2.2"
+
 "babel-messages@^6.23.0":
   "integrity" "sha1-8830cDhYA1sqKVHG7F7fbGLyYw4= sha512-Bl3ZiA+LjqaMtNYopA9TYE9HP1tQ+E5dLxE0XrAzcIJeK2UqF0/EaqXwBn9esd4UmTfEab+P+UYQ1GnioFIb/w=="
   "resolved" "https://registry.npmjs.org/babel-messages/-/babel-messages-6.23.0.tgz"
@@ -1695,17 +1700,22 @@
   dependencies:
     "ember-rfc176-data" "^0.3.17"
 
+"babel-plugin-ember-template-compilation@^1.0.0":
+  "integrity" "sha512-4HBMksmlYsWEf/C/n3uW5rkBRbUp4FNaspzdQTAHgLbfCJnkLze8R6i6sUSge48y/Wne7mx+vcImI1o6rlUwXQ=="
+  "resolved" "https://registry.npmjs.org/babel-plugin-ember-template-compilation/-/babel-plugin-ember-template-compilation-1.0.2.tgz"
+  "version" "1.0.2"
+  dependencies:
+    "babel-import-util" "^1.2.0"
+    "line-column" "^1.0.2"
+    "magic-string" "^0.26.0"
+    "string.prototype.matchall" "^4.0.5"
+
 "babel-plugin-htmlbars-inline-precompile@^0.2.5":
   "integrity" "sha512-H4H75TKGUFij8ukwEYWEERAgrUf16R8NSK1uDPe3QwxT8mnE1K8+/s6DVjUqbM5Pv6lSIcE4XufXdlSX+DTB6g=="
   "resolved" "https://registry.npmjs.org/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-0.2.6.tgz"
   "version" "0.2.6"
 
-"babel-plugin-htmlbars-inline-precompile@^2.1.0":
-  "integrity" "sha512-yoaNhhSO1bM5qgzwmK5y8EteCq6rOsrTjbgVFQoZcVuADAlDPYNcvin4120BR9UPG2qWD3mYwYPfY39kWq3WGA=="
-  "resolved" "https://registry.npmjs.org/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-2.1.0.tgz"
-  "version" "2.1.0"
-
-"babel-plugin-htmlbars-inline-precompile@^5.0.0":
+"babel-plugin-htmlbars-inline-precompile@^5.0.0", "babel-plugin-htmlbars-inline-precompile@^5.3.0":
   "integrity" "sha512-QWjjFgSKtSRIcsBhJmEwS2laIdrA6na8HAlc/pEAhjHgQsah/gMiBFRZvbQTy//hWxR4BMwV7/Mya7q5H8uHeA=="
   "resolved" "https://registry.npmjs.org/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-5.3.1.tgz"
   "version" "5.3.1"
@@ -2602,26 +2612,6 @@
     "sync-disk-cache" "^1.3.3"
     "walk-sync" "^1.0.0"
 
-"broccoli-persistent-filter@^2.3.1":
-  "integrity" "sha512-hVsmIgCDrl2NFM+3Gs4Cr2TA6UPaIZip99hN8mtkaUPgM8UeVnCbxelCvBjUBHo0oaaqP5jzqqnRVvb568Yu5g=="
-  "resolved" "https://registry.npmjs.org/broccoli-persistent-filter/-/broccoli-persistent-filter-2.3.1.tgz"
-  "version" "2.3.1"
-  dependencies:
-    "async-disk-cache" "^1.2.1"
-    "async-promise-queue" "^1.0.3"
-    "broccoli-plugin" "^1.0.0"
-    "fs-tree-diff" "^2.0.0"
-    "hash-for-dep" "^1.5.0"
-    "heimdalljs" "^0.2.1"
-    "heimdalljs-logger" "^0.1.7"
-    "mkdirp" "^0.5.1"
-    "promise-map-series" "^0.2.1"
-    "rimraf" "^2.6.1"
-    "rsvp" "^4.7.0"
-    "symlink-or-copy" "^1.0.1"
-    "sync-disk-cache" "^1.3.3"
-    "walk-sync" "^1.0.0"
-
 "broccoli-persistent-filter@^3.1.2":
   "integrity" "sha512-CbU95RXXVyy+eJV9XTiHUC7NnsY3EvdVrGzp3YgyvO2bzXZFE5/GzDp4X/VQqX+jsk4qyT1HvMOF0sD1DX68TQ=="
   "resolved" "https://registry.npmjs.org/broccoli-persistent-filter/-/broccoli-persistent-filter-3.1.2.tgz"
@@ -2643,16 +2633,6 @@
   "integrity" "sha512-DW8XASZkmorp+q7J4EeDEZz+LoyKLAd2XZULXyD9l4m9/hAKV3vjHmB1kiUshcWAYMgTP1m2i4NnqCE/23h6AQ=="
   "resolved" "https://registry.npmjs.org/broccoli-plugin/-/broccoli-plugin-1.3.1.tgz"
   "version" "1.3.1"
-  dependencies:
-    "promise-map-series" "^0.2.1"
-    "quick-temp" "^0.1.3"
-    "rimraf" "^2.3.4"
-    "symlink-or-copy" "^1.1.8"
-
-"broccoli-plugin@^2.0.0":
-  "integrity" "sha512-ElE4caljW4slapyEhSD9jU9Uayc8SoSABWdmY9SqbV8DHNxU6xg1jJsPcMm+cXOvggR3+G+OXAYQeFjWVnznaw=="
-  "resolved" "https://registry.npmjs.org/broccoli-plugin/-/broccoli-plugin-2.1.0.tgz"
-  "version" "2.1.0"
   dependencies:
     "promise-map-series" "^0.2.1"
     "quick-temp" "^0.1.3"
@@ -3872,27 +3852,6 @@
     "heimdalljs-logger" "^0.1.9"
     "silent-error" "^1.1.0"
 
-"ember-cli-htmlbars@^4.0.1":
-  "integrity" "sha512-jQNw+rMUlFp4muxM6mjIM9GBhC5a4rtShEoeLW6ey1zv/Iaz/t0ZUnOEXozaGu/Z9DBOw0Edb+qGe6TZlR3epw=="
-  "resolved" "https://registry.npmjs.org/ember-cli-htmlbars/-/ember-cli-htmlbars-4.0.1.tgz"
-  "version" "4.0.1"
-  dependencies:
-    "@ember/edition-utils" "^1.1.1"
-    "babel-plugin-htmlbars-inline-precompile" "^2.1.0"
-    "broccoli-debug" "^0.6.5"
-    "broccoli-persistent-filter" "^2.3.1"
-    "broccoli-plugin" "^2.0.0"
-    "common-tags" "^1.8.0"
-    "ember-cli-babel-plugin-helpers" "^1.1.0"
-    "fs-copy-file-sync" "^1.1.1"
-    "hash-for-dep" "^1.5.1"
-    "heimdalljs-logger" "^0.1.10"
-    "json-stable-stringify" "^1.0.1"
-    "mkdirp" "^0.5.1"
-    "semver" "^6.3.0"
-    "strip-bom" "^3.0.0"
-    "walk-sync" "^1.1.3"
-
 "ember-cli-htmlbars@^5.7.1":
   "integrity" "sha512-Uj6R+3TtBV5RZoJY14oZn/sNPnc+UgmC8nb5rI4P3fR/gYoyTFIZSXiIM7zl++IpMoIrocxOrgt+mhonKphgGg=="
   "resolved" "https://registry.npmjs.org/ember-cli-htmlbars/-/ember-cli-htmlbars-5.7.2.tgz"
@@ -3913,6 +3872,26 @@
     "semver" "^7.3.4"
     "silent-error" "^1.1.1"
     "strip-bom" "^4.0.0"
+    "walk-sync" "^2.2.0"
+
+"ember-cli-htmlbars@^6.0.0":
+  "integrity" "sha512-kT+MA2JsNLk10HpxAjpB5HHtR0WCoxZEUwLsy/BBww5lXmsrf34QzmTw7SL6DabZVxs+YCb9RhU9KTmFygGxCg=="
+  "resolved" "https://registry.npmjs.org/ember-cli-htmlbars/-/ember-cli-htmlbars-6.1.0.tgz"
+  "version" "6.1.0"
+  dependencies:
+    "@ember/edition-utils" "^1.2.0"
+    "babel-plugin-ember-template-compilation" "^1.0.0"
+    "babel-plugin-htmlbars-inline-precompile" "^5.3.0"
+    "broccoli-debug" "^0.6.5"
+    "broccoli-persistent-filter" "^3.1.2"
+    "broccoli-plugin" "^4.0.3"
+    "ember-cli-version-checker" "^5.1.2"
+    "fs-tree-diff" "^2.0.1"
+    "hash-for-dep" "^1.5.1"
+    "heimdalljs-logger" "^0.1.10"
+    "js-string-escape" "^1.0.1"
+    "semver" "^7.3.4"
+    "silent-error" "^1.1.1"
     "walk-sync" "^2.2.0"
 
 "ember-cli-inject-live-reload@^1.8.2":
@@ -5020,11 +4999,6 @@
   dependencies:
     "inherits" "^2.0.1"
     "readable-stream" "^2.0.0"
-
-"fs-copy-file-sync@^1.1.1":
-  "integrity" "sha512-2QY5eeqVv4m2PfyMiEuy9adxNP+ajf+8AR05cEi+OAzPcOj90hvFImeZhTmKLBgSd9EvG33jsD7ZRxsx9dThkQ=="
-  "resolved" "https://registry.npmjs.org/fs-copy-file-sync/-/fs-copy-file-sync-1.1.1.tgz"
-  "version" "1.1.1"
 
 "fs-extra@^0.24.0":
   "integrity" "sha1-1OQ0KpZnXLeEZjOmCZJJMytTmVI= sha512-w1RvhdLZdU9V3vQdL+RooGlo6b9R9WVoBanOfoJvosWlqSKvrjFlci2oVhwvLwZXBtM7khyPvZ8r3fwsim3o0A=="
@@ -6153,6 +6127,11 @@
   "resolved" "https://registry.npmjs.org/js-reporters/-/js-reporters-1.2.1.tgz"
   "version" "1.2.1"
 
+"js-string-escape@^1.0.1":
+  "integrity" "sha512-Smw4xcfIQ5LVjAOuJCvN/zIodzA/BBSsluuoSykP+lUvScIi4U6RJLfwHet5cxFnCswUjISV8oAXaqaJDY3chg=="
+  "resolved" "https://registry.npmjs.org/js-string-escape/-/js-string-escape-1.0.1.tgz"
+  "version" "1.0.1"
+
 "js-tokens@^3.0.0 || ^4.0.0", "js-tokens@^3.0.2":
   "integrity" "sha1-mGbfOVECEw449/mWvOtlRDIJwls= sha512-RjTcuD4xjtthQkaWH7dFlH85L+QaVtSoOyGdZ3g6HFhS9dFNDfLyqgm2NFe2X6cQpeFmt0452FJjFG5UameExg=="
   "resolved" "https://registry.npmjs.org/js-tokens/-/js-tokens-3.0.2.tgz"
@@ -6812,6 +6791,13 @@
   dependencies:
     "sourcemap-codec" "^1.4.8"
 
+"magic-string@^0.26.0":
+  "integrity" "sha512-NzzlXpclt5zAbmo6h6jNc8zl2gNRGHvmsZW4IvZhTC4W7k4OlLP+S5YLussa/r3ixNT66KOQfNORlXHSOy/X4A=="
+  "resolved" "https://registry.npmjs.org/magic-string/-/magic-string-0.26.2.tgz"
+  "version" "0.26.2"
+  dependencies:
+    "sourcemap-codec" "^1.4.8"
+
 "make-dir@^1.0.0":
   "integrity" "sha512-2w31R7SJtieJJnQtGc7RVL2StM2vGYVfqUOvUDxH6bC6aJTxPxTF0GnIgCyu7tjockiUWAYQRbxa7vKn34s5sQ=="
   "resolved" "https://registry.npmjs.org/make-dir/-/make-dir-1.3.0.tgz"
@@ -6873,9 +6859,9 @@
     "minimatch" "^3.0.2"
 
 "matcher-collection@^2.0.0":
-  "integrity" "sha512-wSi4BgQGTFfBN5J+pIaS78rEKk4qIkjrw+NfJYdHsd2cRVIQsbDi3BZtNAXTFA2WHvlbS9kLGtTjv3cPJKuRSw=="
-  "resolved" "https://registry.npmjs.org/matcher-collection/-/matcher-collection-2.0.0.tgz"
-  "version" "2.0.0"
+  "integrity" "sha512-daE62nS2ZQsDg9raM0IlZzLmI2u+7ZapXBwdoeBUKAYERPDDIc0qNqA8E0Rp2D+gspKR7BgIFP52GeujaGXWeQ=="
+  "resolved" "https://registry.npmjs.org/matcher-collection/-/matcher-collection-2.0.1.tgz"
+  "version" "2.0.1"
   dependencies:
     "@types/minimatch" "^3.0.3"
     "minimatch" "^3.0.2"
@@ -7079,6 +7065,11 @@
   "integrity" "sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg=="
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.1.tgz"
   "version" "2.1.1"
+
+"ms@2.1.2":
+  "integrity" "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
+  "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
+  "version" "2.1.2"
 
 "mustache@^3.0.0":
   "integrity" "sha512-jFI/4UVRsRYdUbuDTKT7KzfOp7FiD5WzYmmwNwXyUVypC0xjoTL78Fqc0jHUPIvvGD+6DQSPHIt1NE7D1ArsqA=="
@@ -8139,6 +8130,13 @@
     "glob" "^7.1.3"
 
 "rimraf@^3.0.0", "rimraf@^3.0.1", "rimraf@^3.0.2":
+  "integrity" "sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA=="
+  "resolved" "https://registry.npmjs.org/rimraf/-/rimraf-3.0.2.tgz"
+  "version" "3.0.2"
+  dependencies:
+    "glob" "^7.1.3"
+
+"rimraf@^3.0.1":
   "integrity" "sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA=="
   "resolved" "https://registry.npmjs.org/rimraf/-/rimraf-3.0.2.tgz"
   "version" "3.0.2"
@@ -9364,7 +9362,7 @@
     "ensure-posix-path" "^1.0.0"
     "matcher-collection" "^1.0.0"
 
-"walk-sync@^1.0.0", "walk-sync@^1.1.3":
+"walk-sync@^1.0.0":
   "integrity" "sha512-nowc9thB/Jg0KW4TgxoRjLLYRPvl3DB/98S89r4ZcJqq2B0alNcKDh6pzLkBSkPMzRSMsJghJHQi79qw0YWEkA=="
   "resolved" "https://registry.npmjs.org/walk-sync/-/walk-sync-1.1.4.tgz"
   "version" "1.1.4"
