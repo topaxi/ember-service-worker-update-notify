@@ -1,22 +1,25 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import layout from '../templates/components/service-worker-update-notify';
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  layout,
-  tagName: '',
-  serviceWorkerUpdateNotify: service(),
+export default class ServiceWorkerUpdateNotify extends Component {
+  layout = layout;
 
-  hasUpdate: false,
+  @service
+  serviceWorkerUpdateNotify;
 
-  init() {
-    this._super(...arguments);
-    this._updateHandler = () => this.set('hasUpdate', true);
+  @tracked hasUpdate = false;
+
+  constructor() {
+    super(...arguments);
+
+    this._updateHandler = () => this.hasUpdate = true
     this.serviceWorkerUpdateNotify.on('update', this._updateHandler);
-  },
+  }
 
   willDestroy() {
-    this._super(...arguments);
+    super.willDestroy(...arguments);
     this.serviceWorkerUpdateNotify.off('update', this._updateHandler);
   }
-});
+}
